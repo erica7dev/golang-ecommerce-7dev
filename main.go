@@ -9,7 +9,7 @@ import (
 	"github.com/erica7dev/ecommerce-go/controllers"
 	"github.com/erica7dev/ecommerce-go/database"
 	"github.com/erica7dev/ecommerce-go/middleware"
-	"github.com/erica7dev/ecommerce-go/routes"
+	_"github.com/erica7dev/ecommerce-go/routes"
 )
 
 func main(){
