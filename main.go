@@ -4,25 +4,24 @@ import (
 	"log"
 	"os"
 
-	"github.com/gin-gonic/gin"
-
-	"github.com/erica7dev/ecommerce-go/controllers"
 	"github.com/erica7dev/ecommerce-go/database"
+	"github.com/erica7dev/ecommerce-go/routes"
 	"github.com/erica7dev/ecommerce-go/middleware"
-	_"github.com/erica7dev/ecommerce-go/routes"
+	"github.com/erica7dev/ecommerce-go/controllers"
+
+	"github.com/gin-gonic/gin"
 )
 
-func main(){
+func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080"
+		port = "8000"
 	}
-
 	app := controllers.NewApplication(database.ProductData(database.Client, "Products"), database.UserData(database.Client, "Users"))
 
 	router := gin.New()
 	router.Use(gin.Logger())
-	router.UserRoutes(router)
+	routes.UserRoutes(router)
 	router.Use(middleware.Authentication())
 	router.GET("/addtocart", app.AddToCart())
 	router.GET("/removeitem", app.RemoveItem())

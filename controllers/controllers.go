@@ -79,7 +79,7 @@ func SignUp() gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Phone is already in use"})
 			return
 		}
-		password := HashPassword(*user.Password)
+		password := HashPasswords(*user.Password)
 		user.Password = &password
 
 		user.Created_At, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
@@ -133,7 +133,7 @@ func Login() gin.HandlerFunc{
 	}
 }
 
-func ProducyViewerAdmin() gin.HandlerFunc {
+func ProductViewerAdmin() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
 		var products models.Product

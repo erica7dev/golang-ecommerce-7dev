@@ -8,7 +8,7 @@ import (
 
 	"github.com/erica7dev/ecommerce-go/database"
 
-	jwt "github.com/dgrijalva/jwt-go"
+	jwt "github.com/golang-jwt/jwt"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -82,7 +82,7 @@ func UpdateAllTokens(signedtoken string, signedrefreshtoken string, userid strin
 	updated_at, _ := time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
 	updateobj = append(updateobj, bson.E{Key: "updated_at", Value: updated_at})
 	upsert := true
-	filter := bson.M("user_id": userid)
+	filter := bson.M{"user_id": userid}
 	opt := options.UpdateOptions{
 		Upsert: &upsert,
 	}
